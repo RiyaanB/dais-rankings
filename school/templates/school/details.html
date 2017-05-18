@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dais Point Viewer</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-freelancer/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dais Point Viewer</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/static/freelancer.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css" rel="stylesheet" type="text/css">
+    <link href="/static/css(1)" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .center_image_lol
+    {
+    	display: block;
+    	width: 169px;
+    	margin: auto;
+    	padding-left: 7px;
+    }
+    table.center
+    {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 128%;
+    }
+    body
+    {
+        padding-top: 75px;
+    }
+    </style>
+</head>
+
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/home">Point Viewer</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="page-scroll">
+                        <a href="/home">Home</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="/core">Core</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="/houses/overview">Overview</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Houses<span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="background-color:#027AD0;color:white;">
+                            <li><a href="/houses/lions">Lions</a></li>
+                            <li><a href="/houses/tigers">Tigers</a></li>
+                            <li><a href="/houses/panthers">Panthers</a></li>
+                            <li><a href="/houses/jaguars">Jaguars</a></li>
+                        </ul>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="http://www.da-is.org/">DAIS</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <section style="padding-top:0px">
+        <div class="Information">
+                    <br>
+                        <section class="success" id="About" style="padding-top:28px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <h2>{{event.event_name}}</h2>
+                                        {% if not event.hasHappened %}
+                                            <h4>Event is in the future</h4>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+        </div>
+    </section>
+
+    <section style="padding-top:0px">
+        <div class="Information">
+            <table border="2" class="center" width="92%" style="text-align:center">
+                <tr>
+                            <th style="text-align:center">Name</th>
+                            <th style="text-align:center">Date</th>
+                            <th style="text-align:center">Panthers Rank</th>
+                            <th style="text-align:center">Lions Rank</th>
+                            <th style="text-align:center">Tigers Rank</th>
+                            <th style="text-align:center">Jaguars Rank</th>
+                </tr>
+                {% if event.hasHappened %}
+                    <tr>
+                                    <td>{{event.event_name}}</td>
+                                    <td>{{event.event_date}}</td>
+                                    <td><center>{{event.getPantherRank}}</center></td>
+                                    <td><center>{{event.getLionRank}}</center></td>
+                                    <td><center>{{event.getTigerRank}}</center></td>
+                                    <td><center>{{event.getJaguarRank}}</center></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                                    <td><center>{{event.event_name}}</center></td>
+                                    <td><center>{{event.event_date}}</center></td>
+                                    <td colspan="4"><center>--------</center></td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    </section>
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container" style="padding-top:0px">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Houses</h2>
+                    <hr class="circle">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 portfolio-item">
+                    <a href="/houses/lions" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="/static/Lions.png" class="img-responsive" alt="Cabin">
+                    </a>
+                </div>
+                <div class="col-sm-3 portfolio-item">
+                    <a href="/houses/tigers" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="/static/Tigers.png" class="img-responsive" alt="Slice of cake">
+                    </a>
+                </div>
+                <div class="col-sm-3 portfolio-item">
+                    <a href="/houses/jaguars" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="/static/Jaguars.png" class="img-responsive" alt="Circus tent">
+                    </a>
+                </div>
+
+                <div class="col-sm-3 portfolio-item">
+                    <a href="/houses/panthers" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="/static/Panthers.png" class="img-responsive" alt="Safe">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="success" id="About">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>About</h2>
+                    <hr class="circle">
+                </div>
+            </div>
+            <div>
+                <a href="http://www.da-is.org/">
+        			<img src="http://www.da-is.org/images/logo.jpg" class="center_image_lol">
+        		</a>
+        	</div>
+                <p class="text-center">View live scores and positions of the houses at Dhirubhai Ambani International School<br><br></p>
+                <!hr class="circle">
+        </div>
+    </section>
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Riyaan Bakhda 2017
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="/static/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/static/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/static/jqBootstrapValidation.js"></script>
+    <script src="/static/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/static/freelancer.min.js"></script>
+
+
+
+
+</body></html>
