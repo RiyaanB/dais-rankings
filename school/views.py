@@ -2,6 +2,7 @@ from .models import Event
 from datetime import date
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'school/home.html', {})
 
@@ -33,15 +34,37 @@ def house(request,name):
 
 def overview(request):
     all_event = Event.objects.all()
-    panthers = 0
-    lions = 0
-    tigers = 0
-    jaguars = 0
-
     context = {
         'all_events': quick_sort(all_event),
     }
     return render(request, 'school/overview.html', context)
+
+
+def scoreCard(request):
+    if request.user.is_authenticated():
+        all_event = Event.objects.all()
+        sumP = 0
+        for event in all_event:
+            sumP += event.getPantherScore
+        sumL = 0
+        for event in all_event:
+            sumL += event.getLionScore
+        sumT = 0
+        for event in all_event:
+            sumT += event.getTigerScore
+        sumJ = 0
+        for event in all_event:
+            sumJ += event.getJaguarScore
+        context = {
+            'all_events': quick_sort(all_event),
+            'p':sumP,
+            'l':sumL,
+            't':sumT,
+            'j':sumJ,
+        }
+        return render(request, 'school/scoreCard.html', context)
+    else:
+        return HttpResponse("<meta http-equiv=\"refresh\" content=\"0; url=/core\" />")
 
 def hasHappened(event_date):
     return not date.today() < event_date

@@ -32,80 +32,32 @@ class Event(models.Model):
 
     @property
     def getRank(self):
-        p,l,t,j = self.panthers,self.lions,self.tigers,self.jaguars
-        def positions2(p, l, t, j):
-            houses = [p, l, t, j]
-            houseNames = ["Panthers", "Lions", "Tigers", "Jaguars"]
-            first = []
-            second = []
-            third = []
-            fourth = []
-            ###########################
-            top = max(houses)
-            house = 0
-            while True:
-                if houses[house] == top:
-                    first.append(houseNames[house])
-                    houses.pop(house)
-                    houseNames.pop(house)
-                    house -= 1
-                house += 1
-                if house == len(houses):
-                    break
-            ###########################
-            if len(houses) == 0:
-                return first, second, third, fourth
-            top = max(houses)
-            house = 0
-            while True:
-                if houses[house] == top:
-                    second.append(houseNames[house])
-                    houses.pop(house)
-                    houseNames.pop(house)
-                    house -= 1
-                house += 1
-                if house == len(houses):
-                    break
-            ###########################
-            if len(houses) == 0:
-                return first, second, third, fourth
-            top = max(houses)
-            house = 0
-            while True:
-                if houses[house] == top:
-                    third.append(houseNames[house])
-                    houses.pop(house)
-                    houseNames.pop(house)
-                    house -= 1
-                house += 1
-                if house == len(houses):
-                    break
-            ###########################
-            if len(houses) == 0:
-                return first, second, third, fourth
-            top = max(houses)
-            house = 0
-            while True:
-                if houses[house] == top:
-                    fourth.append(houseNames[house])
-                    houses.pop(house)
-                    houseNames.pop(house)
-                    house -= 1
-                house += 1
-                if house == len(houses):
-                    break
+        scores = [['p', self.panthers], ['l', self.lions], ['t', self.tigers], ['j', self.jaguars]]
+        scores = sorted(scores, key=lambda student: student[1], reverse=True)
+        i = 0
+        rankings = []
+        equal_score = 149819248192188919129984
 
-            return first, second, third, fourth
+        for score in scores:
+            if equal_score != score[1]:
+                equal_score = score[1]
+                i += 1
+            rankings.append([score[0], equal_score, i])
 
-        houses = ["Panthers", "Lions", "Tigers", "Jaguars"]
-        ranks = positions2(p, l, t, j)
-        ranksHouse = [0, 0, 0, 0]
 
-        for house in range(len(houses)):
-            for rank in range(len(ranks)):
-                if houses[house] in ranks[rank]:
-                    ranksHouse[house] = rank + 1
-        return ranksHouse
+        ranks = [0,0,0,0]
+
+        for rank in rankings:
+            if rank[0] == 'p':
+                ranks[0] = rank[2]
+            elif rank[0] == 'l':
+                ranks[1] = rank[2]
+            elif rank[0] == 't':
+                ranks[2] = rank[2]
+            elif rank[0] == 'j':
+                ranks[3] = rank[2]
+
+        return ranks
 
     @property
     def getPantherRank(self):

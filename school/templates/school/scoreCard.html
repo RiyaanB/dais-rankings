@@ -42,11 +42,11 @@
     {
         margin-left: auto;
         margin-right: auto;
-        font-size: 144%;
+        font-size: 128%;
     }
     body
     {
-        padding-top: 64px;
+        padding-top: 75px;
     }
     </style>
 </head>
@@ -84,7 +84,7 @@
                             <li><a href="/houses/jaguars">Jaguars</a></li>
                         </ul>
                     </li>
-                    <li class="page-scroll">
+                    <li class="page-scroll active">
                         <a href="/houses/scoreCard">Scores</a>
                     </li>
                     <li class="page-scroll">
@@ -96,54 +96,61 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <section>
+
+
+    <section style="padding-top:0px">
         <div class="Information">
-        {% if all_events %}
-            <section class="success" id="About">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h2>{{CapName}} House Events</h2>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-                <table border="2" class="center" width="92%" style="text-align:center">
-                <tr>
-                    <th style="text-align:center">Name</th>
-                    <th style="text-align:center">Date</th>
-                    <th style="text-align:center">Ranks</th>
-                </tr>
-                {% for event in all_events %}
-                    <tr>
-                        <td><a href="/school/events/{{event.id}}">{{ event.event_name }}</a></td>
-                        {%if event.hasHappened%}
-                            <td>{{event.event_date}}</td>
-                            {% if name == "panthers" %}
-                            <td><center>{{event.getPantherRank}}</center></td>
-                            {% endif %}
-                            {% if name == "lions" %}
-                            <td><center>{{event.getLionRank}}</center></td>
-                            {% endif %}
-                            {% if name == "tigers" %}
-                            <td><center>{{event.getTigerRank}}</center></td>
-                            {% endif %}
-                            {% if name == "jaguars" %}
-                            <td><center>{{event.getJaguarRank}}</center></td>
-                            {% endif %}
-                        {% else %}
-                        <td>{{event.event_date}}</td>
-                        <td><center>Future event</center></td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-                </table>
-            <br />
-        {% else %}
-            <br>
-            <h1>There are no events</h1>
-        {% endif %}
+                {% if all_events %}
+                    <br>
+                        <section class="success" id="About" style="padding-top:28px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <h2>Score Card</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    <br>
+                    <br>
+                        <table border="2" class="center" width="92%" style="text-align:center">
+                        <tr>
+                            <th style="text-align:center">Name</th>
+                            <th style="text-align:center">Date</th>
+                            <th style="text-align:center">Panthers Scores</th>
+                            <th style="text-align:center">Lions Scores</th>
+                            <th style="text-align:center">Tigers Scores</th>
+                            <th style="text-align:center">Jaguars Scores</th>
+                        </tr>
+                        {% for event in all_events %}
+                            <tr>
+                                <td><a href="/school/events/{{event.pk}}">{{ event.event_name }}</a></td>
+                                {%if event.hasHappened%}
+                                    <td>{{event.event_date}}</td>
+                                    <td><center>{{event.getPantherScore}}</center></td>
+                                    <td><center>{{event.getLionScore}}</center></td>
+                                    <td><center>{{event.getTigerScore}}</center></td>
+                                    <td><center>{{event.getJaguarScore}}</center></td>
+                                {% else %}
+                                <td>{{event.event_date}}</td>
+                                <td colspan="4"><center>Event is in the future</center></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td><b>As of Today</b></td>
+                                <td><b>{{p}}</b></td>
+                                <td><b>{{l}}</b></td>
+                                <td><b>{{t}}</b></td>
+                                <td><b>{{j}}</b></td>
+                            </tr>
+                        </table>
+                {% else %}
+                    <br>
+                    <h1>There are no events</h1>
+                {% endif %}
+
         </div>
     </section>
             <div class="row">

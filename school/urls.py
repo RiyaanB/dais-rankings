@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^core', admin.site.urls),
     url(r'^(?P<event_id>\d+)', views.event_details, name="event_details"),
     url(r'^get', views.main, name="main"),
+    url(r'^scoreCard', views.scoreCard, name="scoreCard"),
 ]
 
 if settings.DEBUG:
