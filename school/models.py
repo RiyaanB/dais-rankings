@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import date
+
+
 class Event(models.Model):
     event_name = models.CharField(max_length=128)
     event_date = models.DateField()
@@ -7,6 +9,7 @@ class Event(models.Model):
     panthers = models.IntegerField()
     lions = models.IntegerField()
     jaguars = models.IntegerField()
+
     def __str__(self):
         return self.event_name
     @property
